@@ -30,7 +30,7 @@ const vcard = 'BEGIN:VCARD\n' // OM NO CAMBIO OM
             + 'ORG:Owner BOT;\n' // CAMBIA ESTO
             + 'TEL;type=CELL;type=VOICE;waid=6285559240360:+62 855-5924-0360\n' // CAMBIA ESTO
             + 'END:VCARD' // WEEM ELIMINADO DEJO DE ACTUALIZAR SCRIPT
-prefix = '#'
+prefix = '*'
 blocked = []
 
 function kyun(seconds){
@@ -75,7 +75,7 @@ async function starts() {
 				} catch {
 					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
 				}
-				teks = `Halo @${num.split('@')[0]}\nBienvenido a grupo *${mdata.subject}*`
+				teks = `Hola @${num.split('@')[0]}\nBienvenido a grupo *${mdata.subject}*`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			} else if (anu.action == 'remove') {
@@ -85,7 +85,7 @@ async function starts() {
 				} catch {
 					ppimg = 'https://i0.wp.com/www.gambarunik.id/wp-content/uploads/2019/06/Top-Gambar-Foto-Profil-Kosong-Lucu-Tergokil-.jpg'
 				}
-				teks = `SELAMAT TINGGAL... @${num.split('@')[0]}👋* \n_Cuando regreses no te olvides de traer papitas!!_`
+				teks = `Adiós... @${num.split('@')[0]}👋* \n_Cuando regreses no te olvides de traer papitas!!_`
 				let buff = await getBuffer(ppimg)
 				client.sendMessage(mdata.id, buff, MessageType.image, {caption: teks, contextInfo: {"mentionedJid": [num]}})
 			}
@@ -123,7 +123,7 @@ async function starts() {
 			const isCmd = body.startsWith(prefix)
 
 			mess = {
-				wait: '⌛ Somos Anime ⌛',
+				wait: '⌛ Espere porfavor ⌛',
 				success: '✔️ Eso es todo ✔️',
 				error: {
 					stick: '❌ Falló, se produjo un error al convertir la imagen en una pegatina ❌',
@@ -256,7 +256,7 @@ async function starts() {
 								console.log(`Error : ${err}`)
 								fs.unlinkSync(media)
 								tipe = media.endsWith('.mp4') ? 'video' : 'gif'
-								reply(`❌ Falló, en el momento de la conversión ${tipe} a la pegatina`)
+								reply(`❌ Falló, en el momento de la conversión ${tipe} de la pegatina`)
 							})
 							.on('end', function () {
 								console.log('Finish')
@@ -381,6 +381,18 @@ async function starts() {
 					buffer = await getBuffer(anu.result)
 					client.sendMessage(from, buffer, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
 					break
+				case 'play':   
+	          if (!isUser) return reply(mess.only.daftarB)
+                reply(mess.wait)
+                play = body.slice(5)
+                anu = await fetchJson(`https://api.zeks.xyz/api/ytplaymp3?q=${play}&apikey=apivinz`)
+               if (anu.error) return reply(anu.error)
+                 infomp3 = `*Canción encontrada!!!*\nTitulo : ${anu.result.title}\nFuente : ${anu.result.source}\nTamaño : ${anu.result.size}\n\n*ESPERA SE ESTA ENVIANDO, PUEDE TARDAR UNOS SEGUNDOS*`
+                buffer = await getBuffer(anu.result.thumbnail)
+                lagu = await getBuffer(anu.result.url_audio)
+                client.sendMessage(from, buffer, image, {quoted: mek, caption: infomp3})
+                client.sendMessage(from, lagu, audio, {mimetype: 'audio/mp4', filename: `${anu.title}.mp3`, quoted: mek})
+                break		
 				case 'ytstalk':
 					if (args.length < 1) return reply('¿Qué estás buscando? titit?')
 					anu = await fetchJson(`https://mhankbarbar.tech/api/ytsearch?q=${body.slice(10)}&apiKey=${BarBar}`, {method: 'get'})
