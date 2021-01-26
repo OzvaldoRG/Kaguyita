@@ -345,21 +345,30 @@ async function starts() {
                   client.sendMessage(from, {displayname: "Ishida", vcard: vcard}, MessageType.contact, { quoted: mek})
                client.sendMessage(from, 'Este es mi numero de novio😍, ehh mi dueño jejee😁 no te enfades:*',MessageType.text, { quoted: mek} )
                 break
-				/*case 'loli':
-					loli.getSFWLoli(async (err, res) => {
-						if (err) return reply('❌ *ERROR* ❌')
-						buffer = await getBuffer(res.url)
-						client.sendMessage(from, buffer, image, {quoted: mek, caption: '¡Recuerda! Amo a tu loli'})
+				case 'loli':
+                                        gatauda = body.slice(6)
+                                        if (!isUser) return reply(mess.only.daftarB)
+                                        reply(mess.wait)
+                                        anu = await fetchJson(`https://tobz-api.herokuapp.com/api/randomloli?apikey=BotWeA`, {method: 'get'})
+                                        buffer = await getBuffer(anu.result)
+                                        client.sendMessage(from, buffer, image, {quoted: mek})
+                                        break
 					})
 					break
 				case 'nsfwloli':
-					if (!isNsfw) return reply('❌ *FALSE* ❌')
-					loli.getNSFWLoli(async (err, res) => {
-						if (err) return reply('❌ *ERROR* ❌')
-						buffer = await getBuffer(res.url)
-						client.sendMessage(from, buffer, image, {quoted: mek, caption: 'No hagas ingredientes para mi tío'})
+						try {
+							if (!isNsfw) return reply('❌ *NSFW Desativado* ❌')
+							res = await fetchJson(`https://api.lolis.life/random?nsfw=true`, {method: 'get'})
+							buffer = await getBuffer(res.url)
+							client.sendMessage(from, buffer, image, {quoted: mek, caption: 'Jangan jadiin bahan buat comli om'})
+						} catch (e) {
+							console.log(`Error :`, color(e,'red'))
+							reply('❌ *ERROR* ❌')
+						}
+						break
+						
 					})
-					break*/
+					break
 				case 'hilih':
 					if (args.length < 1) return reply('Teksnya mana um?')
 					anu = await fetchJson(`https://mhankbarbars.herokuapp.com/api/hilih?teks=${body.slice(7)}`, {method: 'get'})
