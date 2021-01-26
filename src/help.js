@@ -28,8 +28,8 @@ const help = (prefix) => {
 ┃ 𝑴𝒆𝒏𝒖 𝑫𝑶𝑾𝑵𝑳𝑶𝑨𝑫
 ┣━━━━━━━━━━━━━━━━━━━━┓
 ┃➢ ${prefix}tiktod
-➢ ${prefix}ytmp3
-➢ ${prefix}play
+┃➢ ${prefix}ytmp3
+┃➢ ${prefix}play
 ┣━━━━━━━━━━━━━━━━━━━━┛
 ┣━━━━━━━━━━━━━━━━━━━━┛
 ┃ 𝑴𝒆𝒏𝒖 𝑴𝑬𝑴𝑬
